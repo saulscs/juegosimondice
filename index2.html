@@ -94,6 +94,9 @@
     .btn-start:active {
       transform: scale(.95);
     }
+    *{
+      font-family: 'Arial';
+    }
 
     </style>
   </head>
@@ -105,6 +108,7 @@
       <div id="verde" class="color verde right" data-color="verde"></div>
       <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
 const celeste = document.getElementById('celeste')
 const violeta = document.getElementById('violeta')
@@ -112,6 +116,7 @@ const naranja = document.getElementById('naranja')
 const verde = document.getElementById('verde')
 const btnEmpezar=document.getElementById('btnEmpezar')
 const ULTIMO_NIVEL = 10; 
+
 
 class Juego{
     constructor(){
@@ -227,15 +232,19 @@ class Juego{
                 this.nivel++
                 this.eliminarEventosClick()
                 if(this.nivel === (ULTIMO_NIVEL + 1)){
-                    //gano
+                    this.ganoElJuego()
                 } else {
                     setTimeout(this.siguienteNivel, 1500)
                 }
             }
         } else {
-            //perdio
+            this.perdioElJuego()
         }
     }
+     ganoElJuego(){
+       swal ('Platzi', 'Ganaste!', 'succes')
+     }
+
 }    
 function empezarJuego(){    
     window.juego = new Juego()
