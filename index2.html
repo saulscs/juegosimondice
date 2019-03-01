@@ -127,8 +127,8 @@ class Juego{
     inicializar(){  
         this.siguienteNivel = this.siguienteNivel.bind(this )   
         this.elegirColor = this.elegirColor.bind(this) 
+        this.togglebtnEmpezar()
         
-        btnEmpezar.classList.add('hide')
         this.nivel = 1 
         this.colores = {
             celeste, 
@@ -136,7 +136,15 @@ class Juego{
             naranja,
             verde
         }    
-    }  
+    } 
+    togglebtnEmpezar(){
+      if (btnEmpezar.classList.contains('hide')){
+        btnEmpezar.classList.remove('hide')
+      }
+      else {
+        btnEmpezar.classList.add('hide')
+      }
+    }
 
     generarSecuencia(){
         this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random()*4))
@@ -243,9 +251,21 @@ class Juego{
     }
      ganoElJuego(){
        swal ('Platzi', 'Ganaste!', 'succes')
+       .then(()=> {
+         this.inicializar()
+       })
+     }
+     perdioElJuego(){
+       swal ('Platzi', 'Perdiste :( ', 'error')
+       .then(()=> {
+         this.eliminarEventosClick()
+         this.inicializar()
+       })
      }
 
 }    
+         
+
 function empezarJuego(){    
     window.juego = new Juego()
 }
